@@ -1,0 +1,39 @@
+- Connexion et inscription pour free trial (14j)
+- Définition des caractéristiques (logo, paramètres de notification,…)
+- Stack-Management -> ingest pipline pour création des pipeline custom enfant qui seront appelé (global@custom, logs-apm@custom, …) en ajoutant les processeur (set et script)
+- Créer les index Template en se déplaçant dans (stack-Management-index-Management-Templates-Edit Template
+- Manager les policy d'index lifecycle à travers les phases (hot, worm, frozen) c'est pour la retention de donnée et ensuite appliquer ces policies aux index Template (cocher la case force merge data et passer le nombre de segments à 1) ; marquer l'index et les métadata de l'index en lecture unique en cochant (read only); Passer les données  à la phase frozen au bout de 13d et les supprimer au bout de 366d, ne pas oublier d'activer le rollover  en définissant le maximum primary shard size.
+
+CREATION DU SPACE (Tenant)
+- Se Rendre dans kibana sous la section "Spaces" et cliquer sur "create space"
+- Remplir les champs "Name", "Description" avec un nom et une descrpition et dans le champ solution view choisir "Classic"
+- Choisisr les fonctionnalités à rendre visible dans le menu de navigation elastic (observability, security, Management, ...), puis définir une image pour commment apparait l'espace puis
+cliquer sur "create space"
+- Créer et attribuer des rôles : Dans la section security -> roles , créer un nuveau role au besoin en y ajoutant son nom et une description respectivement dans les champs "role name" et "role description"
+- Ajouter les 'index privileges' pour pour permettre le control et l'acccès à certaines type de donées dans le cluster
+
+-Affecter le/les roles créer à un tenant en le choisisant par son nom , puis définir les privilèges pour chaque groupe de fonctionnalité (Analytics, Elasticsearch, observability, Sécurity, Management) en les passant sur "All", "None" ou "Read".
+
+
+CREATION DES AGENTS POLICIES et AJOUT DES INTEGRATIONS
+
+- Dans Management-> Fleet -> Agent policies cliquer sur "Create agent policy" et  entrer un nom et une description
+- Définir dans le champ default namespace, une valeur similaire à ce qui à été renseigner pour les roles (doublego)
+- Décocher la case ***Collect agent metrics*** puis laisser les autres paramètres avancées par défaut et cliquer sur **Create Agent Policy**.
+- Laisser les autres paramètres avancées par défaut et cliquer sur le bouton "Create agent policy"
+-Dans **Management -> Fleet -> Agent Policies**, choisir l'agent policy nouvellement créer et cliquer sur **Add Intégration** pour ajouter des intégrations. Donner un nom dans le champ ''integration name'' et décocher (au besoin et si présent dans l'intégration) l'option avancée "Collect metrics from System instances"
+- Ajouter (si besoin) l'intégration "Elastic Defend" en prenant le soin, d'activer les options "Malware protections" (Protection level : Detect; Blocklist : actif; Scan files upon modification : désactivé), "Ransomware protections", "Malicious behavior protections" et "Memory threat protections" avec l'option 'Detect' pour le niveau de protection (Protection level) et la case de l'Event "File" décocher dans la section settings
+
+NB: Adopter comme nomenclature pour les intégrations, le nom de l'agent policy suivi de du nom de l'intégrattion (ex: DOUBLEGO System ; pour l'intégration system-1)
+
+
+-Ajuster le logo de la stack en ajoutant sous Stack Management-> Advanced settings-> Global settings les customs logos du client.
+
+INSTALLATION DE L'AGENT ELASTIC SUR LES POSTES
+-Dans Management-> Fleet -> Agent policies puis cliquer sur l'agent policy voulu. Cliquer sur "Actions" puis sur "add agent".
+- Choisir la plateforme sur laquelle installer l'agent puis copier et exécuter en tant qu'adminstrateur sur le poste à enroller.
+
+
+
+
+
