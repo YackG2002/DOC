@@ -123,12 +123,20 @@ L'agent policy connecteur, est créer pour recevoir les intégrations liés aux 
 Certaines intégrations nécessitent des configurations spécifiques. Voici quelques exemples :
 
 - **Office365** :
-  - Créer dans Azure AD (sous **inscription d'application**) une application qui sera dédiée à l'intégration o365 pour la collecte des logs.
-  - Sur cette applicattion, sous l'onglet **Certificats et secrets**, créez un secret client (client secret) et copiez-le.
-  - Dans l'onglet **API permissions**, ajoutez les autorisations (`ActivityFeed.Read` sous **office 365 Management APIs -> Autorisations déléguées** puis `ActivityFeed.Read` et `ActivityFeed.ReadDlp` sous **office 365 Management APIs -> Autorisations d'application**) ; (`User.Read` sous **API Microsoft Graph -> Autorisations déléguées**) et (`ReportingWebService.Read.All` sous **API utilisées par mon organisation -> Office 365 exchange Online -> Autorisations d'application**).
-  - Dans l'onglet **Overview**, copiez l'ID d'application (client) et l'ID de répertoire (tenant).
-  
-  - Sélectionnez les journaux à collecter (ex. Journaux d'audit, Journaux d'accès).
+  - Accédez à **Azure Active Directory -> Inscription d'application** et créez une application dédiée à l'intégration Office365 pour la collecte des logs.
+  - Dans l'application créée, accédez à l'onglet **Certificats et secrets**, créez un secret client (client secret) et copiez-le immédiatement (il ne sera plus visible après).
+- Rendez-vous dans l'onglet **API permissions** et ajoutez les autorisations suivantes :  
+    - Sous **Office 365 Management APIs -> Autorisations déléguées** : `ActivityFeed.Read`.  
+    - Sous **Office 365 Management APIs -> Autorisations d'application** : `ActivityFeed.Read` et `ActivityFeed.ReadDlp`.  
+    - Sous **API Microsoft Graph -> Autorisations déléguées** : `User.Read`.  
+    - Sous **API utilisées par mon organisation -> Office 365 Exchange Online -> Autorisations d'application** : `ReportingWebService.Read.All`.
+![Office 365 Exchange Online](./image.png)
+
+  - Accordez le consentement administrateur pour valider les autorisations d'application et déléguées.
+  - Dans l'onglet **Overview** de l'application, copiez les informations suivantes :  
+    - **ID d'application (client)**.  
+    - **ID de répertoire (tenant)**.  
+  - Utilisez ces informations pour configurer l'intégration dans Elastic Stack en renseignant les champs requis (Client ID, Client Secret, Tenant ID) et en sélectionnant les journaux à collecter (ex. Journaux d'audit, Journaux d'accès).
   
 - **AlienVault OTX** :
   - Configurez les clés d'accès AWS (Access Key ID et Secret Access Key).
