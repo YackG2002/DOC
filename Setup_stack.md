@@ -1,7 +1,7 @@
 # Configuration de la Stack Elastic pour DoubleGo  
 
 ## Connexion et Inscription  
-1. Inscrivez-vous pour un essai gratuit de 14 jours.  
+1. Inscrivez-vous pour un essai gratuit de 14 jours via [text](https://www.elastic.co/).  
 2. Configurez les caractéristiques de base, telles que le logo et les paramètres de notification.  
 
 ---
@@ -89,15 +89,14 @@
     - Windows  
     - Auditd logs  
     - Osquery_Manager  
-    - System  
-    - Alien Vault OTX  
+    - System   
 
 **Note** : Adoptez une nomenclature pour les intégrations en combinant le nom de la politique d'agent et celui de l'intégration (ex. `DOUBLEGO System` pour l'intégration `system-1`).  
 
 ---
 
 ### Création de l'Agent Policy Connecteur
-L'agent policy connecteur, est créer pour recevoir les intégrations liés aux services cloud (ex: Office365, aws, linode...)  
+L'agent policy connecteur, est créer pour recevoir les intégrations liés aux services cloud (ex: Office365, aws, linode...)
 1. Accédez à **Management -> Fleet -> Agent Policies**.  
 2. Cliquez sur **Create Agent Policy**.  
 3. Remplissez les champs suivants :  
@@ -107,12 +106,24 @@ L'agent policy connecteur, est créer pour recevoir les intégrations liés aux 
 4. Laissez les autres paramètres avancés par défaut.  
 5. Cliquez sur **Create Agent Policy**.  
 
+**Note** : Utilisez une nomenclature standard pour les politiques d'agent connecteur en combinant le nom de l'espace client (namespace) avec le suffixe `Connector`(ex. `DOUBLEGO Connector1`). 
+
 ### Ajout des Intégrations de l'Agent Policy Connecteur
 
 1. Accédez à **Management -> Fleet -> Agent Policies**.
 2. Sélectionnez la politique d'agent connecteur nouvellement créée.
 3. Cliquez sur **Add Integration**.
-4. Dans la liste des intégrations disponibles, recherchez et sélectionnez l'intégration souhaitée.
+![DoubleGoConnector1](DoubleGoConnector1.png)
+4. Dans la liste des intégrations disponibles, recherchez et sélectionnez les intégrations nécessaire à votre connecteur.
+
+***Intégration connecteur de Base***  
+    - Elastic Defend    
+    - Microsoft Exchange Online  
+    - Microsoft office 365
+    - System   
+    - AlienVault OTX
+
+
 5. Configurez les paramètres spécifiques à l'intégration :
     - **Integration Name** : Nom de l'intégration en suivant la nomenclature des noms. (ex. `DoubleGO Connector1 o365`).
     - **Description** : Ajoutez une description (optionel).
@@ -130,17 +141,18 @@ Certaines intégrations nécessitent des configurations spécifiques. Voici quel
     - Sous **Office 365 Management APIs -> Autorisations d'application** : `ActivityFeed.Read` et `ActivityFeed.ReadDlp`.  
     - Sous **API Microsoft Graph -> Autorisations déléguées** : `User.Read`.  
     - Sous **API utilisées par mon organisation -> Office 365 Exchange Online -> Autorisations d'application** : `ReportingWebService.Read.All`.
-![Office 365 Exchange Online](./image.png)
+![Office 365 Exchange Online](./ReportingWebService.png)
 
   - Accordez le consentement administrateur pour valider les autorisations d'application et déléguées.
   - Dans l'onglet **Overview** de l'application, copiez les informations suivantes :  
-    - **ID d'application (client)**.  
-    - **ID de répertoire (tenant)**.  
+    - **ID d'application (client ID)**.  
+    - **ID de répertoire (tenant ID)**.  
   - Utilisez ces informations pour configurer l'intégration dans Elastic Stack en renseignant les champs requis (Client ID, Client Secret, Tenant ID) et en sélectionnant les journaux à collecter (ex. Journaux d'audit, Journaux d'accès).
   
 - **AlienVault OTX** :
-  - Configurez les clés d'accès AWS (Access Key ID et Secret Access Key).
-  - Sélectionnez les services AWS à surveiller (ex. CloudTrail, S3).
+  - Accédez à **AlienVault OTX -> API Keys** et créez une clé API dédiée à l'intégration.
+  - Copiez la clé API générée et conservez-la en lieu sûr.
+  - Ajoutez la clé API AlienVault OTX dans les paramètres de l'intégration.
 
 - **Microsoft Exchange Online** :
   - Ajoutez la clé API Linode.
