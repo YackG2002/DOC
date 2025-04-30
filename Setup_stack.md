@@ -1,7 +1,7 @@
 # Configuration de la Stack Elastic pour DoubleGo  
 
 ## Connexion et Inscription  
-1. Inscrivez-vous pour un essai gratuit de 14 jours via [text](https://www.elastic.co/).  
+1. Inscrivez-vous pour un essai gratuit de 14 jours via [E](https://www.elastic.co/).  
 2. Configurez les caractéristiques de base, telles que le logo et les paramètres de notification.  
 
 ---
@@ -64,9 +64,9 @@
 1. Dans **Management -> Fleet -> Agent Policies**, sélectionnez la politique d'agent nouvellement créée.  
 2. Cliquez sur **Add Integration** pour ajouter des intégrations.  
 3. Remplissez les champs suivants :  
-    - **Integration Name** : Nom de l'intégration.
-    - **Description** : Une description de l'intégration (optionel). 
-    - Décochez l'option avancée **Collect metrics from System instances** si elle est présente. (facultatif)  
+    - **Integration Name** : Nom de l'intégration.  
+    - **Description** : Une description de l'intégration (optionnel).  
+    - Décochez l'option avancée **Collect metrics from System instances** si elle est présente (facultatif).  
 4. Ajoutez l'intégration **Elastic Defend** si nécessaire, en configurant les options suivantes :  
     - **Malware Protections** :  
         - Niveau de protection : ***Detect***.  
@@ -76,91 +76,89 @@
     - **Malicious Behavior Protections** : Activé.  
     - **Memory Threat Protections** :  
         - Niveau de protection : ***Detect***.  
-        - Décochez les cases ***File*** et ***API*** dans les sections ***Event*** sous ***Settings***.
-5.  Ajoutez également l'intégration **Windows**, en activant les options suivantes pour la collecte des logs provenants d'évènement windows
-    -   ***AppLocker/EXE and DLL***
-    -   ***AppLocker/MSI and Script***
-    -   ***Packaged app-Deployment***
-    -   ***Packaged app-Execution***
-    -   ***Windows Defender***
-            
+        - Décochez les cases ***File*** et ***API*** dans les sections ***Event*** sous ***Settings***.  
+5. Ajoutez également l'intégration **Windows**, en activant les options suivantes pour la collecte des logs provenant d'événements Windows :  
+    - ***AppLocker/EXE and DLL***  
+    - ***AppLocker/MSI and Script***  
+    - ***Packaged app-Deployment***  
+    - ***Packaged app-Execution***  
+    - ***Windows Defender***  
+
 ***Intégration de Base (à ajouter)***  
     - Elastic Defend  
     - Windows  
     - Auditd logs  
     - Osquery_Manager  
-    - System   
+    - System  
 
 **Note** : Adoptez une nomenclature pour les intégrations en combinant le nom de la politique d'agent et celui de l'intégration (ex. `DOUBLEGO System` pour l'intégration `system-1`).  
 
 ---
 
 ### Création de l'Agent Policy Connecteur
-L'agent policy connecteur, est créer pour recevoir les intégrations liés aux services cloud (ex: Office365, aws, linode...)
+L'agent policy connecteur est créé pour recevoir les intégrations liées aux services cloud (ex. Office365, AWS, Linode...).  
 1. Accédez à **Management -> Fleet -> Agent Policies**.  
 2. Cliquez sur **Create Agent Policy**.  
 3. Remplissez les champs suivants :  
-    - **Name** : Nom de la politique.  (Préciser "Connector 1" à la suite)  
+    - **Name** : Nom de la politique (préciser "Connector 1" à la suite).  
     - **Description** : Description de la politique.  
-    - **Default Namespace** : Utilisez une valeur similaire à celle définie pour les rôles (ex. `doublego`).   
+    - **Default Namespace** : Utilisez une valeur similaire à celle définie pour les rôles (ex. `doublego`).  
 4. Laissez les autres paramètres avancés par défaut.  
 5. Cliquez sur **Create Agent Policy**.  
 
-**Note** : Utilisez une nomenclature standard pour les politiques d'agent connecteur en combinant le nom de l'espace client (namespace) avec le suffixe `Connector`(ex. `DOUBLEGO Connector1`). 
+**Note** : Utilisez une nomenclature standard pour les politiques d'agent connecteur en combinant le nom de l'espace client (namespace) avec le suffixe `Connector` (ex. `DOUBLEGO Connector1`).  
 
 ### Ajout des Intégrations à l'Agent Policy Connecteur
 
-1. Accédez à **Management -> Fleet -> Agent Policies**.
-2. Sélectionnez la politique d'agent connecteur nouvellement créée.
-3. Cliquez sur **Add Integration**.
-![DoubleGoConnector1](DoubleGoConnector1.png)
-4. Dans la liste des intégrations disponibles, recherchez et sélectionnez les intégrations nécessaire à votre connecteur.
-    ***Intégration connecteur de Base***  
-        - Elastic Defend    
-        - Microsoft Exchange Online  
-        - Microsoft office 365
-        - System   
-        - AlienVault OTX
-5. Configurez les paramètres spécifiques à l'intégration :
-    - **Integration Name** : Nom de l'intégration en suivant la nomenclature des noms. (ex. `DoubleGO Connector1 o365`).
-    - **Description** : Ajoutez une description (optionel).
-    - Remplissez les champs spécifique selon les besoins de l'intégration que vous ajoutez (spécification d'intégration ci-dessous).
-6. Cliquez sur **Save Integration** pour valider.
+1. Accédez à **Management -> Fleet -> Agent Policies**.  
+2. Sélectionnez la politique d'agent connecteur nouvellement créée.  
+3. Cliquez sur **Add Integration**.  
+![DoubleGoConnector1](DoubleGoConnector1.png)  
+4. Dans la liste des intégrations disponibles, recherchez et sélectionnez les intégrations nécessaires à votre connecteur.  
+
+***Intégration connecteur de Base***  
+    - Elastic Defend  
+    - Microsoft Exchange Online  
+    - Microsoft Office 365  
+    - System  
+    - AlienVault OTX  
+
+5. Configurez les paramètres spécifiques à l'intégration :  
+    - **Integration Name** : Nom de l'intégration en suivant la nomenclature des noms (ex. `DoubleGO Connector1 o365`).  
+    - **Description** : Ajoutez une description (optionnel).  
+    - Remplissez les champs spécifiques selon les besoins de l'intégration que vous ajoutez (spécification d'intégration ci-dessous).  
+6. Cliquez sur **Save Integration** pour valider.  
 
 #### Étapes Spécifiques pour Certaines Intégrations
-Certaines intégrations nécessitent des configurations spécifiques. Voici quelques exemples :
+Certaines intégrations nécessitent des configurations spécifiques. Voici quelques exemples :  
 
-- **AlienVault OTX** :
-  - Activez pour l'intégration, l'option **Ingest threat intelligence indicators from AlienVault OTX**.
-  - Accédez dans **AlienVault OTX -> API Keys** et créez une clé API dédiée à l'intégration.
-  - Copiez la clé API ainsi que le Token générée et conservez-la en lieu sûr.
-  - Ajoutez la clé API et le Token AlienVault OTX respectivement dans les  champs **API Key** et **Token** de l'intégration dans Stack Elastic.
-![otx token field](./otx_token.png) ![otx key field](./otx_key.png)
+- **AlienVault OTX** :  
+  - Activez pour l'intégration l'option **Ingest threat intelligence indicators from AlienVault OTX**.  
+  - Accédez dans **AlienVault OTX -> API Keys** et créez une clé API dédiée à l'intégration.  
+  - Copiez la clé API ainsi que le Token généré et conservez-les en lieu sûr.  
+  - Ajoutez la clé API et le Token AlienVault OTX respectivement dans les champs **API Key** et **Token** de l'intégration dans Stack Elastic.  
+![otx token field](./otx_token.png) ![otx key field](./otx_key.png)  
 
-- **Office365** :
-  - Cliquez sur l'intégration **Microsoft Office 365**  et laisser les paramètres specifiques par défaut.
-  - Accédez à **Azure Active Directory -> Inscription d'application** et créez une application dédiée à l'intégration Office365 pour la collecte des logs.
-  ![Creation o365 app](creation-o365-app.png)
-  - Copier le **ID d'application (client ID)** puis le renseigner dans le champ requis **Client ID** dans l'intégration o365 de Elastic.
-  - Dans l'application créée, accédez à l'onglet **Certificats et secrets**, créez un secret client (client secret) et copiez-le immédiatement.
-  ![Certificats and secret](./certificats&secret.png)
+- **Office365** :  
+  - Cliquez sur l'intégration **Microsoft Office 365** et laissez les paramètres spécifiques par défaut.  
+  - Accédez à **Azure Active Directory -> Inscription d'application** et créez une application dédiée à l'intégration Office365 pour la collecte des logs.  
+  ![Creation o365 app](creation-o365-app.png)  
+  - Copiez le **ID d'application (client ID)** puis renseignez-le dans le champ requis **Client ID** dans l'intégration o365 de Elastic.  
+  - Dans l'application créée, accédez à l'onglet **Certificats et secrets**, créez un secret client (client secret) et copiez-le immédiatement.  
+  ![Certificats and secret](./certificats&secret.png)  
   - Rendez-vous dans l'onglet **API autorisées** et ajoutez les autorisations suivantes :  
-  ![o365 API](./o365API.png)
+  ![o365 API](./o365API.png)  
     - Sous **Office 365 Management APIs -> Autorisations déléguées** : `ActivityFeed.Read`.  
-    ![o365 first API](./activityfeed.png)
-    - Sous **Office 365 Management APIs -> Autorisations d'application** : `ActivityFeed.Read` et `ActivityFeed.ReadDlp`.
+    ![o365 first API](./activityfeed.png)  
+    - Sous **Office 365 Management APIs -> Autorisations d'application** : `ActivityFeed.Read` et `ActivityFeed.ReadDlp`.  
     ![o365 second API](./activityfeedAdding.png)  
     - Sous **API Microsoft Graph -> Autorisations déléguées** : `User.Read`.  
-    ![o365 third API](./userReadAutorisation.png)
-    - Sous **API utilisées par mon organisation -> Office 365 Exchange Online -> Autorisations d'application** : `ReportingWebService.Read.All`.
-![Office 365 Exchange Online](./ReportingWebService.png)
-  - Accordez le consentement administrateur pour valider les autorisations d'application et déléguées.
-  ![Grant consent](./grantConsent.png)
-  - Dans l'onglet **Overview** de Microsoft Azure, copiez le **ID de répertoire (tenant ID)** puis le renseigner dans le champ **Tenant ID** dans l'intégration o365 dans Elastic.
-
-- **Microsoft Exchange Online** :
-  - Ajoutez la clé API Linode.
-  - Configurez les paramètres de collecte des métriques.
+    ![o365 third API](./userReadAutorisation.png)  
+    - Sous **API utilisées par mon organisation -> Office 365 Exchange Online -> Autorisations d'application** : `ReportingWebService.Read.All`.  
+![Office 365 Exchange Online](./ReportingWebService.png)  
+  - Accordez le consentement administrateur pour valider les autorisations d'application et déléguées.  
+  ![Grant Consent](./grantConsent.png)  
+  - Dans l'onglet **Overview** de Microsoft Azure, copiez le **ID de répertoire (tenant ID)** puis renseignez-le dans le champ **Tenant ID** dans l'intégration o365 dans Elastic.  
 
 ---
 
