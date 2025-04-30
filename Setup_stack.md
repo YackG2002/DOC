@@ -1,7 +1,7 @@
 # Configuration de la Stack Elastic pour DoubleGo  
 
 ## Connexion et Inscription  
-1. Inscrivez-vous pour un essai gratuit de 14 jours via [E](https://www.elastic.co/).  
+1. Inscrivez-vous pour un essai gratuit de 14 jours via [Elastic](https://www.elastic.co/).  
 2. Configurez les caractéristiques de base, telles que le logo et les paramètres de notification.  
 
 ---
@@ -113,7 +113,9 @@ L'agent policy connecteur est créé pour recevoir les intégrations liées aux 
 1. Accédez à **Management -> Fleet -> Agent Policies**.  
 2. Sélectionnez la politique d'agent connecteur nouvellement créée.  
 3. Cliquez sur **Add Integration**.  
-![DoubleGoConnector1](DoubleGoConnector1.png)  
+
+![DoubleGoConnector1](DoubleGoConnector1.png) 
+
 4. Dans la liste des intégrations disponibles, recherchez et sélectionnez les intégrations nécessaires à votre connecteur.  
 
 ***Intégration connecteur de Base***  
@@ -136,28 +138,47 @@ Certaines intégrations nécessitent des configurations spécifiques. Voici quel
   - Activez pour l'intégration l'option **Ingest threat intelligence indicators from AlienVault OTX**.  
   - Accédez dans **AlienVault OTX -> API Keys** et créez une clé API dédiée à l'intégration.  
   - Copiez la clé API ainsi que le Token généré et conservez-les en lieu sûr.  
-  - Ajoutez la clé API et le Token AlienVault OTX respectivement dans les champs **API Key** et **Token** de l'intégration dans Stack Elastic.  
-![otx token field](./otx_token.png) ![otx key field](./otx_key.png)  
+  - Ajoutez la clé API et le Token AlienVault OTX respectivement dans les champs **API Key** et **Token** de l'intégration dans Stack Elastic. 
+
+![otx token field](./otx_token.png) 
+
+![otx key field](./otx_key.png)  
 
 - **Office365** :  
   - Cliquez sur l'intégration **Microsoft Office 365** et laissez les paramètres spécifiques par défaut.  
   - Accédez à **Azure Active Directory -> Inscription d'application** et créez une application dédiée à l'intégration Office365 pour la collecte des logs.  
-  ![Creation o365 app](creation-o365-app.png)  
+
+  ![Creation o365 app](creation-o365-app.png)
+
   - Copiez le **ID d'application (client ID)** puis renseignez-le dans le champ requis **Client ID** dans l'intégration o365 de Elastic.  
-  - Dans l'application créée, accédez à l'onglet **Certificats et secrets**, créez un secret client (client secret) et copiez-le immédiatement.  
+  - Dans l'application créée, accédez à l'onglet **Certificats et secrets**, créez un secret client (client secret) et copiez-le immédiatement. 
+
   ![Certificats and secret](./certificats&secret.png)  
+
   - Rendez-vous dans l'onglet **API autorisées** et ajoutez les autorisations suivantes :  
+
   ![o365 API](./o365API.png)  
-    - Sous **Office 365 Management APIs -> Autorisations déléguées** : `ActivityFeed.Read`.  
+
+    - Sous **Office 365 Management APIs -> Autorisations déléguées** : `ActivityFeed.Read`.
+
     ![o365 first API](./activityfeed.png)  
-    - Sous **Office 365 Management APIs -> Autorisations d'application** : `ActivityFeed.Read` et `ActivityFeed.ReadDlp`.  
+
+    - Sous **Office 365 Management APIs -> Autorisations d'application** : `ActivityFeed.Read` et `ActivityFeed.ReadDlp`.
+
     ![o365 second API](./activityfeedAdding.png)  
-    - Sous **API Microsoft Graph -> Autorisations déléguées** : `User.Read`.  
+
+    - Sous **API Microsoft Graph -> Autorisations déléguées** : `User.Read`.
+
     ![o365 third API](./userReadAutorisation.png)  
+
     - Sous **API utilisées par mon organisation -> Office 365 Exchange Online -> Autorisations d'application** : `ReportingWebService.Read.All`.  
+
 ![Office 365 Exchange Online](./ReportingWebService.png)  
+
   - Accordez le consentement administrateur pour valider les autorisations d'application et déléguées.  
+
   ![Grant Consent](./grantConsent.png)  
+
   - Dans l'onglet **Overview** de Microsoft Azure, copiez le **ID de répertoire (tenant ID)** puis renseignez-le dans le champ **Tenant ID** dans l'intégration o365 dans Elastic.  
 
 ---
